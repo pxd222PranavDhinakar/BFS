@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Breadth First Search: Graph</title>
+    <!-- Include the main p5.js library -->
+    <script src="libraries/p5.js"></script>
+    <!-- Include additional p5.js modules -->
+    <script src="libraries/p5.sound.js"></script>
+    <script src="libraries/p5.dom.js"></script>
+    <!-- Include your sketch file -->
+    <script src="sketch.js"></script>
+    <script src="bfs.js"></script>
+    <!-- Add a style block for CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #888; /* Gray background */
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .controls {
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .controls label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .controls input[type="number"], .controls button {
+            margin-bottom: 5px;
+            padding: 3px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .controls button {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+
+        .chart {
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="controls">
+            <label for="numNodes">Nodes:</label>
+            <input type="number" id="numNodes" placeholder="Nodes">
+            <label for="numEdges">Edges:</label>
+            <input type="number" id="numEdges" placeholder="Edges">
+            <button onclick="generateGraph()">Generate</button>
+            <button id="runBfs">Run BFS</button>
+            <button id="stepBfs">Step BFS</button>
+        </div>
+        <div class="chart">
+            <h3>Node Info</h3>
+            <p id="currentNode">Current: N/A</p>
+            <p>Adjacency List:</p>
+            <ul id="adjacencyList"></ul>
+        </div>
+    </div>
+    <div id="canvasContainer"></div> <!-- This is where your p5.js canvas will go -->
+</body>
+</html>
