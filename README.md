@@ -35,7 +35,7 @@ You can modify the appearance and behavior of the animation by editing the follo
 
 ## Author
 
-- [Your Name]
+- Pranav Dhinakar
 
 ## License
 
