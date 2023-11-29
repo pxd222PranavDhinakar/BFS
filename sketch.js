@@ -1,9 +1,40 @@
+// sketch.js
+
 let nodes = [];
 let edges = [];
 
+class Node {
+    constructor(x, y, value) {
+        this.x = x;
+        this.y = y;
+        this.value = value;
+        this.color = 255; // White color by default
+        this.adjacencyList = [];
+    }
+
+    draw() {
+        fill(this.color);
+        stroke(0); // Black border
+        strokeWeight(1);
+        ellipse(this.x, this.y, 20, 20);
+    }
+
+    addEdge(node) {
+        this.adjacencyList.push(node);
+    }
+}
+
+
 function setup() {
     createCanvas(800, 600).parent('canvasContainer');
-    // Initialize graph or leave it for the generateGraph function
+
+    // Set default values for nodes and edges
+    document.getElementById('numNodes').value = 10;
+    document.getElementById('numEdges').value = 9;
+
+    // Call generateGraph to create the default graph
+    generateGraph();
+
 }
 
 function draw() {
@@ -79,4 +110,8 @@ function generateGraph() {
 
     // Redraw the graph
     redraw();
+}
+
+function redrawGraph() {
+    redraw(); // This assumes your draw function handles drawing the graph correctly
 }

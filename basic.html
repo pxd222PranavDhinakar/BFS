@@ -9,13 +9,13 @@
     <script src="libraries/p5.dom.js"></script>
     <!-- Include your sketch file -->
     <script src="sketch.js"></script>
+    <script src="bfs.js"></script>
 </head>
 <body>
-    <!-- Your HTML content goes here -->
     <input type="number" id="numNodes" placeholder="Number of Nodes">
     <input type="number" id="numEdges" placeholder="Number of Edges">
     <button onclick="generateGraph()">Generate Graph</button>
+    <button id="runBfs">Run BFS</button> <!-- Added 'Run' button -->
     <div id="canvasContainer"></div> <!-- This is where your p5.js canvas will go -->
-    <!-- Other HTML content -->
 </body>
 </html>
