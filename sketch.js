@@ -7,13 +7,14 @@ function setup() {
 }
 
 function draw() {
-    background(255);
+    background(58, 58, 60); // Set the background to graphite gray
     drawGraph();
 }
 
 function drawGraph() {
     // Draw edges
-    stroke(0); // Set the color of the stroke (black)
+    stroke(0); // Set the color of the stroke (black) for edges
+    strokeWeight(1); // Set the stroke weight for edges
     for (let edge of edges) {
         let node1 = nodes[edge[0]];
         let node2 = nodes[edge[1]];
@@ -21,8 +22,9 @@ function drawGraph() {
     }
 
     // Draw nodes
-    fill(255, 0, 0); // Set the color of the nodes (red)
-    noStroke(); // No border for the nodes
+    fill(255); // Set the color of the nodes to white
+    stroke(0); // Set the color of the stroke (black) for node borders
+    strokeWeight(1); // Set the stroke weight for node borders
     for (let node of nodes) {
         ellipse(node.x, node.y, 20, 20); // Draw nodes as circles
     }
