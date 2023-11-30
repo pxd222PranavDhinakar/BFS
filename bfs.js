@@ -117,8 +117,29 @@ function stepBFS() {
     bfsStep();
 }
 
+
+function highlightPseudoCodeLine(lineNumber) {
+    const pseudoCodeElement = document.getElementById('pseudo-code');
+    const lines = pseudoCodeElement.getElementsByTagName('div');
+
+    // Reset the background color of all lines
+    for (let line of lines) {
+        line.style.backgroundColor = 'transparent';
+    }
+
+    // Highlight the specific line
+    if (lineNumber >= 0 && lineNumber < lines.length) {
+        lines[lineNumber].style.backgroundColor = 'yellow';
+    }
+}
+
+
+
 document.addEventListener('DOMContentLoaded', (event) => {
+    initializePseudoCodeDisplay();
     document.getElementById('runBfs').addEventListener('click', runFullBFS);
     document.getElementById('stepBfs').addEventListener('click', stepBFS);
 });
+
+
 

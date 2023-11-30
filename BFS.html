@@ -19,11 +19,12 @@
             padding: 0;
         }
 
-        .container {
+        .top-bar {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             padding: 10px;
+            gap: 5px;
         }
 
         .controls {
@@ -31,15 +32,16 @@
             padding: 10px;
             border-radius: 5px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            flex-basis: 30%; /* Adjust the basis for controls */
         }
 
         .controls label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 20px;
         }
 
         .controls input[type="number"], .controls button {
-            margin-bottom: 5px;
+            margin-bottom: 20px;
             padding: 3px;
             border: 1px solid #ccc;
             border-radius: 3px;
@@ -52,16 +54,27 @@
             padding: 5px 10px;
         }
 
-        .chart {
+        .canvas-container {
             background-color: #fff;
-            padding: 10px;
-            border-radius: 5px;
+            border-radius: 10px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            flex-grow: 1; /* Allow canvas container to grow and take available space */
+            flex-shrink: 1; /* Allow canvas container to shrink if necessary */
+        }
+
+        #pseudo-code {
+            width: 30%; /* Adjust width as needed */
+            background-color: #f5f5f5; /* Light grey background */
+            padding: 20px;
+            overflow-y: auto; /* Enable scrolling */
+            max-height: 500px; /* Adjust the height as needed */
+            border-left: 1px solid #ccc; /* Separator from canvas */
+            font-family: monospace; /* Monospace font for code */
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="top-bar">
         <div class="controls">
             <label for="numNodes">Nodes:</label>
             <input type="number" id="numNodes" placeholder="Nodes">
@@ -71,7 +84,12 @@
             <button id="runBfs">Run BFS</button>
             <button id="stepBfs">Step BFS</button>
         </div>
+        <div class="canvas-container">
+            <!-- This is where your p5.js canvas will go -->
+        </div>
+        <div id="pseudo-code">
+            <!-- Pseudo code will be dynamically inserted here -->
+        </div>
     </div>
-    <div id="canvasContainer"></div> <!-- This is where your p5.js canvas will go -->
 </body>
 </html>

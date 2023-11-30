@@ -1,5 +1,20 @@
 // test Sketch for BFS
 
+const bfsPseudoCode = [
+    "BFS(G, startVertex):",
+    "  let Q be a queue",
+    "  label startVertex as explored",
+    "  Q.enqueue(startVertex)",
+    "  while Q is not empty:",
+    "    v = Q.dequeue()",
+    "    if v is the goal:",
+    "      return v",
+    "    for each edge (v, u):",
+    "      if u is unexplored:",
+    "        label u as explored",
+    "        Q.enqueue(u)"
+];
+
 class Node {
     constructor(x, y, value) {
         this.x = x;
@@ -69,7 +84,6 @@ class Edge {
 }
 
 
-
 // Array to store nodes and edges
 let nodes = [];
 let edges = [];
@@ -83,6 +97,8 @@ function setup() {
 
 
     generateGraph(); // Example: Generate graph with 10 nodes and 15 edges
+    initializePseudoCodeDisplay(); // Initialize the pseudo-code display
+
 }
 
 function draw() {
@@ -96,6 +112,14 @@ function draw() {
 
     drawLegend(); // Draw the legend on the canvas
 }
+
+function initializePseudoCodeDisplay() {
+    const pseudoCodeElement = document.getElementById('pseudo-code');
+    const formattedPseudoCode = bfsPseudoCode.map((line, index) => 
+        `<div id="pseudo-line-${index}">${line}</div>`).join('');
+    pseudoCodeElement.innerHTML = `<pre>${formattedPseudoCode}</pre>`;
+}
+
 
 
 function drawLegend() {
@@ -226,4 +250,9 @@ function applyForceDirectedLayout(iterations) {
             toNode.y -= dy * attractionForce;
         }
     }
+}
+
+
+function redrawGraph() {
+    redraw();  // Calls p5.js redraw function
 }
