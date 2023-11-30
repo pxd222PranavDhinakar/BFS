@@ -1,68 +1,4 @@
 // bfs.js
-/*
-// Function to color a random node
-function runBFS() {
-    // Check if there are nodes
-    if (nodes.length === 0) return; 
-
-    //else {
-    //    console.log("Number of nodes:", nodes.length);
-    //}
-
-    // Pick a random node
-    let randomNodeIndex = Math.floor(Math.random() * nodes.length);
-
-    // Color the random node black
-    nodes[randomNodeIndex].color = 'black';
-
-    // Redraw the graph
-    redrawGraph(); // This function should be defined in sketch.js
-}
-*/
-
-// Animated BFS
-/*
-function runBFS() {
-    if (nodes.length === 0) return;
-
-    // Initialize all nodes to unexplored
-    nodes.forEach(node => node.color = "white");
-
-    // Pick a random start node
-    let startIndex = Math.floor(Math.random() * nodes.length);
-    let startNode = nodes[startIndex];
-    startNode.color = "gray"; // Mark as currently exploring
-
-    // Initialize the queue with the start node
-    let queue = [startNode];
-
-    // Function to process one step of BFS
-    function bfsStep() {
-        if (queue.length > 0) {
-            let currentNode = queue.shift(); // Dequeue a node
-
-            // Process the current node
-            currentNode.adjacencyList.forEach(neighbor => {
-                if (neighbor.color === "white") { // Check if unexplored
-                    neighbor.color = "gray"; // Mark as currently exploring
-                    queue.push(neighbor);
-                }
-            });
-
-            currentNode.color = "black"; // Mark as fully explored
-
-            // Redraw the graph
-            redrawGraph();
-
-            // Continue with the next step after a delay
-            setTimeout(bfsStep, 500); // Adjust delay as needed
-        }
-    }
-
-    // Start the BFS animation
-    bfsStep();
-}
-*/
 
 
 // Animated and Stepped BFS
@@ -85,27 +21,11 @@ function initializeBFS() {
     return true;
 }
 
-
-function updateChart(currentNode) {
-    // Update current node information
-    document.getElementById('currentNode').textContent = `Current Node: ${currentNode.value}`;
-
-    // Update adjacency list
-    const adjacencyListElement = document.getElementById('adjacencyList');
-    adjacencyListElement.innerHTML = ''; // Clear previous list
-    currentNode.adjacencyList.forEach(neighbor => {
-        let listItem = document.createElement('li');
-        listItem.textContent = neighbor.value;
-        adjacencyListElement.appendChild(listItem);
-    });
-}
-
+/*
+// ITERATION #1: Basic BFS Step
 function bfsStep() {
     if (queue.length > 0) {
         let currentNode = queue.shift(); // Dequeue a node
-
-        // Update chart with current node information
-        updateChart(currentNode);
 
         currentNode.adjacencyList.forEach(neighbor => {
             if (neighbor.color === "white") {
@@ -120,6 +40,70 @@ function bfsStep() {
         clearInterval(bfsInterval);
     }
 }
+*/
+
+/*
+// ITERATION #2: Highlighting Nodes
+function bfsStep() {
+    if (queue.length > 0) {
+        let currentNode = queue.shift(); // Dequeue a node
+
+        // Highlight current node
+        currentNode.highlight(); // Implement this method in the Node class
+
+        currentNode.adjacencyList.forEach(neighbor => {
+            if (neighbor.color === "white") {
+                neighbor.color = "lightgray"; // Color for nodes added to the queue
+                queue.push(neighbor);
+            }
+        });
+
+        setTimeout(() => {
+            currentNode.color = "black"; // Final color for explored nodes
+            redrawGraph();
+        }, 250); // Delay for color transition effect
+    } else {
+        clearInterval(bfsInterval);
+    }
+}
+*/
+
+
+// ITERATION #3: Highlighting Edges
+function bfsStep() {
+    if (queue.length > 0) {
+        let currentNode = queue.shift(); // Dequeue a node
+        currentNode.highlight(); // Highlight the current node
+
+        currentNode.adjacencyList.forEach(neighbor => {
+            if (neighbor.color === "white") {
+                neighbor.color = "gray"; // Color for nodes added to the queue
+
+                // Find and color the edge
+                colorEdge(currentNode, neighbor, 'red'); // Use a function to color the edge
+
+                queue.push(neighbor);
+            }
+        });
+
+        currentNode.color = "black"; // Final color for explored nodes
+        redrawGraph();
+    } else {
+        clearInterval(bfsInterval);
+    }
+}
+
+
+function colorEdge(node1, node2, color) {
+    for (let edge of edges) {
+        if ((edge.from === node1.value && edge.to === node2.value) ||
+            (edge.to === node1.value && edge.from === node2.value)) { // For undirected graph
+            edge.setColor(color);
+            break;
+        }
+    }
+}
+
 
 function runFullBFS() {
     if (!initializeBFS()) return;
@@ -137,6 +121,4 @@ document.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById('runBfs').addEventListener('click', runFullBFS);
     document.getElementById('stepBfs').addEventListener('click', stepBFS);
 });
-
-
 
